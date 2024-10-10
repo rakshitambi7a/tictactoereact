@@ -71,20 +71,40 @@ export default function App(){
 	function jumpTo(nextMove){
 		setCurrentMove(nextMove);
 
+
 	}
 
 	const moves = history.map((squares, move) => {
 		let description;
-		if (move > 0) {
+		if(move == currentMove)
+		{
+			description= 'You are at move #' + move;
+		}
+		else if (move > 0) {
 		  description = 'Go to move #' + move;
-		} else {
+		}
+		
+		else
+		{
 		  description = 'Go to game start';
 		}
-		return (
-		  <li key={move}>
-			<button className="game-info" onClick={() => jumpTo(move)}>{description}</button>
-		  </li>
-		);
+
+		if(move == currentMove){
+			return (
+				<li className="move-list" key={move}>
+				  <div className="game-info">{description}</div>
+				</li>
+			  );
+		}
+		else{
+			return (
+				<li className="move-list" key={move}>
+				  <button className="game-info" onClick={() => jumpTo(move)}>{description}</button>
+				</li>
+			  );
+		}
+
+		
 	  });
 
 	return (
