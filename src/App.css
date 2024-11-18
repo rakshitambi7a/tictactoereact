@@ -1,51 +1,82 @@
 #root {
-  min-height: 100vh;
-  min-width: 100vw;
+  min-height: inherit;
+  min-width: inherit;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
 }
 .game{
+  justify-content: space-evenly;
   display: flex;
   flex-direction: row;
-  height: 100%;
-  width: 100%;
-  justify-content: center;
+  min-height: inherit;
+  min-width: inherit;
 
 }
-.game-board{
+.game-play{
   display: flex;
   flex-direction: column;
-  gap: 2em;
-  height: 100%;
-  width: 50%;
-  
+  gap: 2rem;
+  align-items: center;
+}
 
+.board{
+  display: flex;
+  flex-direction: column;
+  max-height: fit-content;
+  min-width: fit-content;
+  border: 1px solid white;
+  border-radius: 16px;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
 }
 .board-row{
   display: flex;
-  flex-direction: row;
-  height: 3rem;
-  width: 100%;
+  flex-direction:column;
+  height: inherit;
+  aspect-ratio: 1;
+  margin: 0;
+  padding: 0;
 }
+
+.square-row{
+  display: flex;
+  min-height: fit-content;
+  max-height: fit-content;
+}
+
 .square{
-  min-height: 5rem;
-  min-width: 5rem;
-  font-size: 4rem;
-  border: 2px solid white;
+  min-height: 6rem;
+  aspect-ratio: 1;
+  font-size: 5rem;
+  border: 1px solid white;
   background-color: rgb(62, 62, 62);
   
 }
 .square:hover{
   background-color: black;
+  cursor:cell;
 }
 .game-info{
+  width: 50%;
   display: flex;
   flex-direction: column;
-  font-size: 1.2em;
-  gap: 3em;
-  width: 50%;
+  font-size: 1.1em;
   height: fit-content;
+
+}
+.game-info>ul{
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.game-info-button{
+  padding: 8px 16px;
+  background-color: rgb(74, 74, 74);
+  cursor: pointer;
+  border-radius: 5px;
+  border-width: 0px;
   
 }
 .status{

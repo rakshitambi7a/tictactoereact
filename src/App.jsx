@@ -28,28 +28,34 @@ function Board({xIsNext, squares, onPlay}) {
 	let status;
 	if (winner) {
 	    status = "Winner: " + winner;
-	  } else {
-	    status = "Next player: " + (xIsNext ? "X" : "O");
-	  }
+	} 
+	else{
+		status = "Next player: " + (xIsNext ? "X" : "O");
+	}
 
-	return (<> 
+	const boardRow = [];
+	for(let row=0; row<3;row++){
+		const sqauresInRow=[];
+		for(let column=0; column < 3; column++){
+			const index = row * 3 + column;
+			sqauresInRow.push(
+				<Square value={squares[index]} onSquareClick={() => handleClick(index)}/>
+			);
+		}
+		boardRow.push(
+			<div key={row} className="square-row">
+			{sqauresInRow}
+			</div>
+		);
+	}
+	
+
+	return (<div className="game-play"> 
 		<div className="status">{status}</div>
-		<div className="board-row">
-			<Square value={squares[0]} onSquareClick={() => handleClick(0)}/>
-			<Square value={squares[1]} onSquareClick={() => handleClick(1)}/>
-			<Square value={squares[2]} onSquareClick={() => handleClick(2)}/>
+		<div className="board">
+			<div className="board-row">{boardRow}</div>
 		</div>
-		<div className="board-row">
-			<Square value={squares[3]} onSquareClick={() => handleClick(3)}/>
-			<Square value={squares[4]} onSquareClick={() => handleClick(4)}/>
-			<Square value={squares[5]} onSquareClick={() => handleClick(5)}/>
-		</div>
-		<div className="board-row">
-			<Square value={squares[6]} onSquareClick={() => handleClick(6)}/>
-			<Square value={squares[7]} onSquareClick={() => handleClick(7)}/>
-			<Square value={squares[8]} onSquareClick={() => handleClick(8)}/>
-		</div>
-	</>
+	</div>
 	);
 }
 
@@ -78,10 +84,10 @@ export default function App(){
 		let description;
 		if(move == currentMove)
 		{
-			description= 'You are at move #' + move;
+			description= "You're @ move #" + move;
 		}
 		else if (move > 0) {
-		  description = 'Go to move #' + move;
+		  description = "Go to move #" + move;
 		}
 		
 		else
@@ -99,7 +105,7 @@ export default function App(){
 		else{
 			return (
 				<li className="move-list" key={move}>
-				  <button className="game-info" onClick={() => jumpTo(move)}>{description}</button>
+				  <button className="game-info game-info-button" onClick={() => jumpTo(move)}>{description}</button>
 				</li>
 			  );
 		}
@@ -109,15 +115,12 @@ export default function App(){
 
 	return (
 		<div className="game">
-			<div className="game-board">
 				<Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
-			</div>
-			<div className="game-info">
-				<ul>
-					{moves}
-				</ul>
-			</div>
-
+		<div className="game-info">
+			<ul>
+				{moves}
+			</ul>
+		</div>
 		</div>
 	)
 }
